@@ -17,5 +17,13 @@ jobs:
 
     steps:
       - uses: actions/checkout@v7
+      - name: Free disk space for Lean documentation
+        if: ${{ github.event_name == 'push' && github.event.repository.has_pages }}
+        run: |
+          df -h .
+          sudo rm -rf -- /usr/local/lib/android /usr/share/dotnet /opt/ghc \
+            /usr/local/.ghcup /opt/hostedtoolcache/CodeQL /usr/share/swift
+          df -h .
       - uses: leanprover/lean-action@v1
       - uses: leanprover-community/docgen-action@v1
+        if: ${{ github.event_name == 'push' && github.event.repository.has_pages }}
