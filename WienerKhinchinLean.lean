@@ -1,1 +1,3 @@
-import WienerKhinchinLean.Basic
+module
+
+public import WienerKhinchinLean.Basic
